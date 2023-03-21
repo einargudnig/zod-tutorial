@@ -4,14 +4,10 @@ import { expect, it } from "vitest";
 import { z } from "zod";
 
 const Form = z.object({
-  name: z.string(),
-  //             ^ 🕵️‍♂️
-  phoneNumber: z.string().optional(),
-  //                    ^ 🕵️‍♂️
-  email: z.string(),
-  //              ^ 🕵️‍♂️
-  website: z.string().optional(),
-  //                ^ 🕵️‍♂️
+  name: z.string().min(1),
+  phoneNumber: z.string().min(5).max(20).optional(),
+  email: z.string().email(),
+  website: z.string().url().optional(),
 });
 
 export const validateFormInput = (values: unknown) => {
